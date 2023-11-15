@@ -26,7 +26,7 @@ const handleFulfilledEnter = (state, action) => {
   state.isLoading = false;
 };
 const handleFulfilledLogOut = state => {
-  state.user = { name: null, email: null };
+  state.user = { email: '', name: '', password: '' };
   state.token = null;
   state.isLoggedIn = false;
   state.isLoading = false;
@@ -39,7 +39,7 @@ const handleFulfilledRefresh = (state, action) => {
 };
 
 const initialState = {
-  user: { name: null, email: null },
+  user: { email: '', name: '', password: '' },
   token: null,
   isLoggedIn: false,
   isRefreshing: false,

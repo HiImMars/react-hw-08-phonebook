@@ -1,38 +1,28 @@
 import { Button, TextField } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { signUp } from 'redux/auth/operations';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { logIn } from 'redux/auth/operations';
 
-export const SignUp = () => {
+export const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = e => {
     e.preventDefault();
-    const newUser = {
-      name: e.target.elements.name.value,
-      email: e.target.elements.email.value,
-      password: e.target.elements.password.value,
-    };
-    signUp(newUser);
-    navigate('/login');
+
+    dispatch(
+      logIn({
+        email: e.target.elements.email.value,
+        password: e.target.elements.password.value,
+      })
+    );
+    navigate('/contacts');
   };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <h2>Sign Up</h2>
-        <TextField
-          label="Name"
-          name="name"
-          //   onChange={e => setEmail(e.target.value)}
-          required
-          variant="outlined"
-          color="secondary"
-          type="text"
-          sx={{ mb: 3, mt: 2 }}
-          fullWidth
-          //   value={email}
-          //   error={emailError}
-        />
+        <h2>Log in</h2>
         <TextField
           label="Email"
           name="email"
@@ -41,7 +31,7 @@ export const SignUp = () => {
           variant="outlined"
           color="secondary"
           type="email"
-          sx={{ mb: 3 }}
+          sx={{ mb: 3, mt: 2 }}
           fullWidth
           //   value={email}
           //   error={emailError}
@@ -60,9 +50,12 @@ export const SignUp = () => {
           sx={{ mb: 3 }}
         />
         <Button variant="outlined" color="secondary" type="submit">
-          Sign Up
+          Login
         </Button>
       </form>
+      <small>
+        Need an account? <Link to="/signup">Sign up here</Link>
+      </small>
     </>
   );
 };
