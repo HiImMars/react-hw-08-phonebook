@@ -10,13 +10,13 @@ export const UserMenu = () => {
 
   const handleLogOut = () => {
     dispatch(logOut());
-    navigate('/');
   };
 
   return (
     <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
       <Button sx={{ my: 2, color: '#00385e', display: 'block' }}>
-        {user.email}
+        <h2>{user.name}</h2>
+        <p>{user.email}</p>
       </Button>
       <Button
         onClick={handleLogOut}

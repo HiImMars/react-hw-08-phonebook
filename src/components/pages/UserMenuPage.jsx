@@ -1,5 +1,18 @@
 import { UserMenu } from 'components/UserMenu/UserMenu';
+import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 export const UserMenuPage = () => {
-  return <UserMenu />;
+  const isAuth = useSelector(state => state.auth.token);
+
+  return (
+    <>
+      {isAuth && <UserMenu />}
+      {!isAuth && (
+        <h2>
+          You should <NavLink to={'/login'}>log in</NavLink> to see your profile
+        </h2>
+      )}
+    </>
+  );
 };
