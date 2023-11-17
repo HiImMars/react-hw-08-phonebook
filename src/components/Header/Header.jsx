@@ -15,6 +15,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logOut } from 'redux/auth/operations';
 
 const theme = createTheme({
   palette: {
@@ -25,9 +27,12 @@ const theme = createTheme({
   },
 });
 
-const pages = ['Home', 'Contacts', 'SignUp', 'Login', 'UserMenu'];
+const pages = ['Home', 'Contacts', 'SignUp', 'UserMenu', 'Login'];
 
 export const Header = () => {
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
+
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = event => {
@@ -36,6 +41,10 @@ export const Header = () => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const handleLogOut = () => {
+    dispatch(logOut());
   };
 
   return (
@@ -123,23 +132,39 @@ export const Header = () => {
               iPhonebook
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              {pages.map(page => (
-                <NavLink
-                  key={page}
-                  to={
-                    page.toLowerCase() === 'home'
-                      ? '/'
-                      : `/${page.toLowerCase()}`
-                  }
-                >
-                  <Button
-                    onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
+              {pages.map(page =>
+                isLoggedIn && page.toLowerCase() === 'login' ? (
+                  <>
+                    <Button
+                      onClick={handleLogOut}
+                      sx={{
+                        my: 2,
+                        color: 'white',
+                        backgroundColor: '#844d36',
+                        display: 'block',
+                      }}
+                    >
+                      Log Out
+                    </Button>
+                  </>
+                ) : (
+                  <NavLink
+                    key={page}
+                    to={
+                      page.toLowerCase() === 'home'
+                        ? '/'
+                        : `/${page.toLowerCase()}`
+                    }
                   >
-                    {page}
-                  </Button>
-                </NavLink>
-              ))}
+                    <Button
+                      onClick={handleCloseNavMenu}
+                      sx={{ my: 2, color: 'white', display: 'block' }}
+                    >
+                      {page}
+                    </Button>
+                  </NavLink>
+                )
+              )}
             </Box>
           </Toolbar>
         </Container>
