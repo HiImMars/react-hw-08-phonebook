@@ -98,19 +98,25 @@ export const Header = () => {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                {pages.map(page => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <NavLink
-                      to={
-                        page.toLowerCase() === 'home'
-                          ? '/'
-                          : `/${page.toLowerCase()}`
-                      }
-                    >
-                      <Typography textAlign="center">{page}</Typography>
-                    </NavLink>
-                  </MenuItem>
-                ))}
+                {pages.map(page =>
+                  isLoggedIn && page.toLowerCase() === 'login' ? (
+                    <MenuItem onClick={handleLogOut}>
+                      <Typography textAlign="center">Log Out</Typography>
+                    </MenuItem>
+                  ) : (
+                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                      <NavLink
+                        to={
+                          page.toLowerCase() === 'home'
+                            ? '/'
+                            : `/${page.toLowerCase()}`
+                        }
+                      >
+                        <Typography textAlign="center">{page}</Typography>
+                      </NavLink>
+                    </MenuItem>
+                  )
+                )}
               </Menu>
             </Box>
             <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />

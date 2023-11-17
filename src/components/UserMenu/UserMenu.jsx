@@ -1,12 +1,10 @@
 import { Box, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { logOut } from 'redux/auth/operations';
 
 export const UserMenu = () => {
   const user = useSelector(state => state.auth.user);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleLogOut = () => {
     dispatch(logOut());
