@@ -32,11 +32,11 @@ export const ContactList = () => {
 
   return (
     <ul className={css.list}>
-      {filteredContacts.map(({ id, name, phone }) => (
+      {filteredContacts.map(({ id, name, number }) => (
         <li className={css.item} key={id}>
           <div className={css.contactInfo}>
             <p className={css.name}>{name}</p>
-            <p className={css.phone}>{phone}</p>
+            <p className={css.phone}>{number}</p>
           </div>
           <button
             className={css.button}
@@ -49,7 +49,7 @@ export const ContactList = () => {
         </li>
       ))}
       {isLoading && <p className={css.loader}>Loading, please wait</p>}
-      {error && <p>Oppsss Erorr</p>}
+      {error && <p>Oooops Error</p>}
     </ul>
   );
 };

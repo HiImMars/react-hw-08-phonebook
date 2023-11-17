@@ -17,8 +17,8 @@ export const ContactForm = () => {
     const isContactExist = contacts.some(
       contact =>
         (contact.name.toLowerCase() === lowerCaseName &&
-          contact.phone === number) ||
-        contact.phone === number ||
+          contact.number === number) ||
+        contact.number === number ||
         contact.name.toLowerCase() === lowerCaseName
     );
 
@@ -26,7 +26,7 @@ export const ContactForm = () => {
       ? alert(
           `Contact with that ${name} or ${number} is already present in the phonebook.`
         )
-      : dispatch(addContact({ name: name, phone: number }));
+      : dispatch(addContact({ name, number }));
 
     form.reset();
   };
