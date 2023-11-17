@@ -16,7 +16,7 @@ export const Login = () => {
         password: e.target.elements.password.value,
       })
     );
-    navigate('/contacts');
+    navigate('/usermenu');
   };
 
   return (

@@ -25,7 +25,7 @@ const theme = createTheme({
   },
 });
 
-const pages = ['Home', 'Contacts', 'SignUp', 'Login'];
+const pages = ['Home', 'Contacts', 'SignUp', 'Login', 'UserMenu'];
 
 export const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -60,7 +60,6 @@ export const Header = () => {
             >
               iPhonebook
             </Typography>
-
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
                 size="large"
@@ -92,17 +91,15 @@ export const Header = () => {
               >
                 {pages.map(page => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">
-                      <NavLink
-                        to={
-                          page.toLowerCase() === 'Home'
-                            ? `'/'`
-                            : `'/${page.toLowerCase()}'`
-                        }
-                      >
-                        {page}
-                      </NavLink>
-                    </Typography>
+                    <NavLink
+                      to={
+                        page.toLowerCase() === 'home'
+                          ? '/'
+                          : `/${page.toLowerCase()}`
+                      }
+                    >
+                      <Typography textAlign="center">{page}</Typography>
+                    </NavLink>
                   </MenuItem>
                 ))}
               </Menu>
@@ -127,21 +124,21 @@ export const Header = () => {
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map(page => (
-                <Button
+                <NavLink
                   key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
+                  to={
+                    page.toLowerCase() === 'home'
+                      ? '/'
+                      : `/${page.toLowerCase()}`
+                  }
                 >
-                  <NavLink
-                    to={
-                      page.toLowerCase() === 'home'
-                        ? '/'
-                        : `/${page.toLowerCase()}`
-                    }
+                  <Button
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
                   >
                     {page}
-                  </NavLink>
-                </Button>
+                  </Button>
+                </NavLink>
               ))}
             </Box>
           </Toolbar>
