@@ -1,10 +1,9 @@
 import { Button, TextField } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { logIn } from 'redux/auth/operations';
+import { Link } from 'react-router-dom';
+import { logIn, refreshUser } from 'redux/auth/operations';
 
 export const Login = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
@@ -15,8 +14,11 @@ export const Login = () => {
         email: e.target.elements.email.value,
         password: e.target.elements.password.value,
       })
-    );
-    navigate('/usermenu');
+    )
+      .unwrap()
+      .then(() => {
+        dispatch(refreshUser());
+      });
   };
 
   return (

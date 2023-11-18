@@ -15,8 +15,9 @@ export const SignUp = () => {
       password: e.target.elements.password.value,
     };
 
-    dispatch(signUp(newUser));
-    navigate('/login');
+    dispatch(signUp(newUser))
+      .unwrap()
+      .then(() => navigate('/login'));
   };
 
   return (

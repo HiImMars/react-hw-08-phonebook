@@ -3,7 +3,6 @@ import {
   Box,
   Button,
   Container,
-  createTheme,
   IconButton,
   Menu,
   MenuItem,
@@ -17,20 +16,13 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from 'redux/auth/operations';
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#844d36',
-      contrastText: '#8ad0ff',
-    },
-  },
-});
+import { selectIsLoggedIn } from 'redux/auth/selectors';
+import { theme } from 'components/theme/theme';
 
 const pages = ['Home', 'Contacts', 'SignUp', 'UserMenu', 'Login'];
 
 export const Header = () => {
-  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
 
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -106,6 +98,7 @@ export const Header = () => {
                   ) : (
                     <MenuItem key={page} onClick={handleCloseNavMenu}>
                       <NavLink
+                        style={{ textDecoration: 'none' }}
                         to={
                           page.toLowerCase() === 'home'
                             ? '/'
@@ -146,7 +139,7 @@ export const Header = () => {
                     sx={{
                       my: 2,
                       color: 'white',
-                      backgroundColor: '#844d36',
+                      backgroundColor: '#8f8f8f',
                       display: 'block',
                     }}
                   >
@@ -154,6 +147,7 @@ export const Header = () => {
                   </Button>
                 ) : (
                   <NavLink
+                    style={{ textDecoration: 'none' }}
                     key={page}
                     to={
                       page.toLowerCase() === 'home'
