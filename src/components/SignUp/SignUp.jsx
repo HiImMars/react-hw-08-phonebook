@@ -27,39 +27,30 @@ export const SignUp = () => {
         <TextField
           label="Name"
           name="name"
-          //   onChange={e => setEmail(e.target.value)}
           required
           variant="outlined"
           color="secondary"
           type="text"
           sx={{ mb: 3, mt: 2 }}
           fullWidth
-          //   value={email}
-          //   error={emailError}
         />
         <TextField
           label="Email"
           name="email"
-          //   onChange={e => setEmail(e.target.value)}
           required
           variant="outlined"
           color="secondary"
           type="email"
           sx={{ mb: 3 }}
           fullWidth
-          //   value={email}
-          //   error={emailError}
         />
         <TextField
           label="Password"
           name="password"
-          //   onChange={e => setPassword(e.target.value)}
           required
           variant="outlined"
           color="secondary"
           type="password"
-          //   value={password}
-          //   error={passwordError}
           fullWidth
           sx={{ mb: 3 }}
         />
